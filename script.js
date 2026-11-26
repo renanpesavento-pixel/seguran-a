@@ -22,6 +22,10 @@ function aumentaFonte(){
 tamanhoFonteAtual=tamanhoFonteAtual + valorAdicionado;
   document. documentElement.style.fontSize= '$(tamanhoFonteAtual)px';
 }
+function diminuiFonte(){
+tamanhoFonteAtual=tamanhoFonteAtual - valorSubtraido;
+  document. documentElement.style.fontSize= '$(tamanhoFonteAtual)px';
+}
 // LEITURA DE TELA
 let lendo = false;
 let btnLeitura = document.querySelector(".botao-leitura");
@@ -39,10 +43,18 @@ else{
     //speechSynthesis.pause();
 }
 return;
-let btnAjuda = document.querySelector(".botao-ajuda");
-let btnFechar = document.querySelector(".botao-fechar");
-let modal = document.querySelector(".modal-fundo");
+}
+let conteudo = document.querySelector("main");
+let texto = conteudo.innerText;
+let fala = new SpeechSynthesisUtterance(texto);
 
+fala.lang = "pt-BR";
+fala.onend = finalizarLeitura;
 
-btnAjuda.addEventListener("click", abreModal);
-btnFechar.addEventListener("click", fechaModal);
+lendo == true {
+speechSynthesis.cancel();
+speechSynthesis.speak(fala);
+}
+function finalizarLeitura(){
+    lendo == false;
+}
